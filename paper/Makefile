@@ -1,12 +1,16 @@
 manuscript = paper
-references = refs
+references = refs simulators benchmarks cosi
 latexopt   = -halt-on-error -file-line-error
 
-all: all-via-dvi
+for file in $(references); do \
+   ref_handles = $(ref_handles) $(file).bib \
+done
 
-all-via-pdf: $(manuscript).tex $(references).bib
+all: all-via-pdf
+
+all-via-pdf: $(manuscript).tex $(ref_handles)
 	pdflatex $(latexopt) $<
-	bibtex $(manuscript $<).aux
+	bibtex $(manuscript).aux
 	pdflatex $(latexopt) $<
 	pdflatex $(latexopt) $<
 
@@ -18,7 +22,7 @@ all-via-dvi:
 	dvipdf $(manuscript)
 
 clean:
-	rm -f *.pdf *.dvi *.toc *.aux *.out *.log *.bbl *.blg *.log *.spl *~ *.spl *.zip
+	rm -f *.pdf *.dvi *.toc *.aux *.out *.log *.bbl *.blg *.log *.spl *~ *.spl *.zip *.idx *.lof *.lot
 
 realclean: clean
 	rm -rf $(manuscript).dvi

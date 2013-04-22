@@ -1,0 +1,25 @@
+
+There are a number of agent-based supply chain frameworks and 
+implementations available in the literature with varying levels of 
+accessibility due to proprietary considerations.\cite{swaminathan_modeling_1998}\cite{julka_agent-based_2002}\cite{van_der_zee_modeling_2005}\cite{chatfield_multi-formalism_2007}
+However, the nuclear fuel cycle presents a few unique characteristics not explicitly 
+treated in the literature. Perhaps the most difficult consideration 
+we have identified is the need to specify target fuel recipes and
+match suppliers and consumers based on the requested recipe, i.e. 
+there are both quantity and quality constraints placed on a requested 
+commodity. An additional difficulty arises with the enforcement of 
+regional-boundary constraints (e.g. prohibiting HEU trade between 
+regions) and inter-enterprise preferences. We propose to tackle both 
+issues via a comprehensive supply/demand matching mechanism.
+
+We propose using a supply/demand matching algorithm that is comprised 
+of three main procedures: request-for-bids, preference assignment, 
+and resolution. The request-for-bids step signals the producers of 
+various commodities of the demand and material specification for 
+those commodities. The preference assignment step allows the customers
+to analyze each bid in order to assign a preference. The managers of 
+these customers (be they at the region or enterprise level) are 
+allowed to affect the decision making process at this point in order 
+to inform the preferences of the customers covered by their policy 
+space. The resolution step takes the as input the bids and 
+preferences and outputs the material flows for the given time step.\cite{cyclus2012}
