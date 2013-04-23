@@ -1,16 +1,39 @@
+\subsection{Fuel Cycle Simulators}
 
-There are a number of agent-based supply chain frameworks and 
-implementations available in the literature with varying levels of 
-accessibility due to proprietary considerations.\cite{swaminathan_modeling_1998}\cite{julka_agent-based_2002}\cite{van_der_zee_modeling_2005}\cite{chatfield_multi-formalism_2007}
-However, the nuclear fuel cycle presents a few unique characteristics not explicitly 
-treated in the literature. Perhaps the most difficult consideration 
-we have identified is the need to specify target fuel recipes and
-match suppliers and consumers based on the requested recipe, i.e. 
-there are both quantity and quality constraints placed on a requested 
-commodity. An additional difficulty arises with the enforcement of 
-regional-boundary constraints (e.g. prohibiting HEU trade between 
-regions) and inter-enterprise preferences. We propose to tackle both 
-issues via a comprehensive supply/demand matching mechanism.
+Previous implementations of fuel cycle simulators have varied both in
+methodology and distribution platform. The general purpose of all simulators is
+to model the flow of material around the fuel cycle in order to determine the
+viability of various proposed fuel cycles and their relative
+performance \textit{vis-a-vis} a variety of metrics including resource
+utilization, costs, and proliferation resistance. However, there are a few key
+choices that have been historically made by all simulation developers,
+including: what program or language to use, how to determine the flow of
+material when there are competing sources or sinks for that material, how to
+determine which facilities to build and when to build them, and at what level of
+fidelity simulation physics should be modeled (e.g., should material decay or
+should it not). One could describe these are the major design choices for
+simulation development teams to assess, and in general approaches are taken
+which span the gamut from the computationally ``easy'' to the computationally
+``complex'' and the spectrum of almost full user-control to more substantial use
+of automated decision making.
+
+
+
+\subsection{Agent Based Supply Chain Simulation}
+
+There are a number of agent-based supply chain frameworks and implementations
+available in the literature with varying levels of accessibility due to
+proprietary
+considerations \cite{swaminathan_modeling_1998,julka_agent-based_2002,van_der_zee_modeling_2005,chatfield_multi-formalism_2007}.
+However, the nuclear fuel cycle presents a few unique characteristics not
+explicitly treated in the literature. Perhaps the most difficult consideration
+we have identified is the need to specify target fuel recipes and match
+suppliers and consumers based on the requested recipe, i.e.  there are both
+quantity and quality constraints placed on a requested commodity. An additional
+difficulty arises with the enforcement of regional-boundary constraints
+(e.g. prohibiting HEU trade between regions) and inter-enterprise
+preferences. We propose to tackle both issues via a comprehensive supply/demand
+matching mechanism.
 
 We propose using a supply/demand matching algorithm that is comprised 
 of three main procedures: request-for-bids, preference assignment, 
@@ -23,3 +46,5 @@ allowed to affect the decision making process at this point in order
 to inform the preferences of the customers covered by their policy 
 space. The resolution step takes the as input the bids and 
 preferences and outputs the material flows for the given time step.\cite{cyclus2012}
+
+\subsection{Mathematical Programming}
