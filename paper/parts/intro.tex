@@ -1,24 +1,48 @@
+Nuclear fuel cycle simulation is a practiced by many different nation states,
+academics, and some private companies. The actors in this arena, however, often
+are interested in different categories of questions which tend to drive their
+simulation design decisions. The first simulators implemented over a decade ago
+were designed to answer broad reaching questions regarding the basic fuel
+stockpile makeups as a function of time given a variety of top-level fuel cycle
+decisions. For instance, one may investigate the relative repository
+requirements for different fuel cycles as a function of the aggregate elemental
+composition of their mass flows to the repository. Fairly quickly, however, one
+realizes that the granularity of the class of questions that can be investigate
+is rather coarse. Furthermore, for the majority of simulators, expert input is
+required to investigate even slightly different cases (e.g., investigating the
+effect of higher burnup fuels). Finally, because each simulator is championed by
+a different entity and developed in relative isolation, the actual simulation
+mechanics differ across the spectrum of simulators, causing benchmarking efforts
+to be cumbersome and making the simulators difficult to validate. 
 
-There is strong motivation for pursuing a decision-based, 
-discrete-time, discrete-object fuel cycle simulation infrastructure. 
-The fuel cycle simulation community has long been a collection of 
-individual actors designing simulation tools for specific 
-requirements, the results of which are then difficult or impossible 
-to compare/benchmark. Additional difficulties arise when proprietary 
-software is used as the foundation of the model framework due to 
-licensing restrictions and high costs. Accordingly, we have been 
-working through a number of design iterations to arrive at a generic 
-framework that supports the nuclear systems simulation community in a 
-broad sense, i.e. a ``generic-enough'' tool to allow for system design, 
-connection, and analysis as well as comparison with other similarly 
-designed systems.
+Accordingly, there is strong motivation to reflect on the purpose and scope of
+fuel cycle simulation in order to determine how one may investigate the suite of
+questions that interested parties have regarding the nuclear fuel cycle. The
+proposed work herein provides a methodological description of a generic
+simulation engine and interface that is agnostic to the different fuel cycle
+options that can be investigate. The interaction amongst facilities is
+abstracted away into a mathematical programming approximation of matching of
+supply and demand. Facilities themselves can behave in an automated or
+user-defined fashion, e.g., modules are currently in development to allow for
+on-the-fly isotopic calculations of spent reactor fuel based on run-time
+parameters. The facility building decision making is abstracted away into
+entities which own a given set of facilities. Finally, the demand for various
+facilities' services is abstracted away into entities modeled as regions. The
+various layers of abstraction from a simulation design point-of-view allow
+interested parties to investigate separate effects on their preferred fuel cycle
+metrics. Furthermore, the separation of the simulation engine from the various
+entities comprising the fuel cycle allows for easier and more straightforward
+testing and benchmarking.
 
-When viewing the nuclear fuel cycle through a facility-connections 
-lens, it becomes apparent that the life cycle of material constitutes 
-a supply chain. Different supply chain structures are currently 
-present in the real fuel cycle, e.g. the rigid top-down structure in France 
-as opposed to the more global, multi-tiered supply chains resulting 
-from U.S. Section 123 Agreements. In order to model the variety of
-possible structures, one must allow for independent decision making. 
-Due to the aggregation of requirements, a natural fit is the 
-burgeoning field of agent-based, supply-chain network simulation.
+Perhaps one of the strongest motivating factors of a renewed look at design and
+collaboration on nuclear fuel cycle simulation is the ability to foster and grow
+a simulation community. The proposed simulation framework is being implemented
+as \Cyclus \cite{cyclus2012}, a nuclear fuel cycle simulator developed at the
+University of Wisconsin - Madison in conjunction with a number of other
+collabortors, including the University of Texas at Austin, the University of
+Utah, and the University of Idaho. \Cyclus is has an open-source codebase,
+allowing other interested developers to use or add to the existing simulation
+infrastructure. Critically, the fact that the source code is open allows for
+transparent investigation of the inner workings of the simulation. For example,
+other's efforts to benchmark their findings agaisnt a \Cyclus simulation is
+relatively easy in comparison to closed-source simulators. 
