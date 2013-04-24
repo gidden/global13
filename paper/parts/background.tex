@@ -149,3 +149,28 @@ decision variables is the Branch and Bound Method, first presented by Land and
 Doig \cite{land_automatic_1960}. It also has been used prolifically in the
 optimization community. A mixed integer-linear program (MILP) formulation of the
 nuclear fuel cycle is provided in the methodology section.
+
+\subsection{Automation of Fuel Cycle Simulation}
+
+There has recently been a movement towards automating facility decision making
+on time scales appropriate for the quick computation times required by the
+current state of the art of fuel cycle simulation in order to perform the
+parameter sweeps required for fuel cycle investigation. A prime example can be
+composed of the simulators described thus far. On one end, VISION requires
+user-defined input and output fuel recipes, and its simulation engine uses
+heuristics to manage discrepencies between the two at run time (although it has
+the offers the future capability to populate databases which can be interpolated
+to determine output isotopics \cite{jacobson_verifiable_2010}). On the other end
+of the computation spectrum, COSI performs relatively precise depletion
+calculations for each reactor configuration, using a transport calculation to
+determine fluence rates and multigroup cross sections, collapsing those into
+1-group cross sections, and using those 1-group cross sections and the
+Runga-Kutta method via CESAR to determine the depleted isotopic
+vector \cite{meyer_new_2009}. An automated, hybrid method has been proposed by
+Scopatz that uses an ``essential physics fluence-based parameterized reactor
+burnup model''\cite{scopatz_essential_2011} that covers both thermal and fast
+fluence-based reactors. Similarly, Huff provides an automated repository
+model. Described in the metholodolgy of this sectio, the underlying methods used
+for automating a separations facility is described, providing one possible
+solution technique to the ``Winery Problem'' (i.e., how to operate a separations
+facility given output spent fuel and requested input fuel).
