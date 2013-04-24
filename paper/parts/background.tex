@@ -7,23 +7,112 @@ determine the viability of various proposed fuel cycles and their relative
 performance \textit{vis-a-vis} a variety of metrics including resource
 utilization, costs, and proliferation resistance. However, there are a few key
 choices that have been historically made by all simulation developers,
-including: what program or language to use, how to determine the flow of
-material when there are competing sources or sinks for that material, how to
-determine which facilities to build, when to build them, and whether to model
-them individually, and at what level of fidelity physics should be modeled in
-the simulation (e.g., should material decay or should it not). One could
-describe these are the major design choices for simulation development teams to
-assess, and in general approaches are taken which span the gamut from the
+including: what program or language to use, how to determine which facilities to
+build, when to build them, how to determine the flow of material when there are
+competing sources or sinks for that material, and whether to model them
+individually, and at what level of fidelity physics should be modeled in the
+simulation (e.g., should material decay or should it not). One could describe
+these are the major design choices for simulation development teams to assess,
+and in general approaches are taken which span the gamut from the
 computationally ``easy'' to the computationally ``complex'' and the spectrum of
 almost full user-control to more substantial use of automated decision making.
 
+The majority of fuel cycle simulation codes have been developed using a system
+dynamics platform. CAFCA \cite{guerin_impact_2009}, developed at MIT, was
+originally a MATLAB application, but is now written in the commercial software
+VENSIM \cite{vensim_2010_ventana}. VISION \cite{jacobson_verifiable_2010},
+developed by INL and originally based off of of the DYMOND
+code \cite{moisseytsev_dymond_2001}, has its simulation infrastructure written
+in the commercial software Powersim \cite{studio_powersim_2003}.
+DANESS \cite{van_den_durpel_daness_2009}, originally developed at ANL and now
+moved to LISTO bvba in Belgium, is an iThink \cite{richmond_ithink_2004}
+application. Simulators that aren't written as commercial system dynamics
+applications tend to fall on either side of the spectrum of computational
+tools. COSI \cite{boucher_cosi_2005}, for instance, is developed by the French
+CEA in Java. Cyclus \cite{cyclus2012}, developed at UW-Madison, is a C++
+application which provides an XML-input front end and SQL backend. Other fuel
+cycle simulations tend to be focused more on scoping calculations, for which
+spreadsheets can be applicable \cite{brudieu_evaluation_2011}. In general, all
+simulators (unless otherwise specified above) use Microsoft Excel to manage both
+input and output.
 
+After choosing a development platform, the next basic simulation design decision
+deals with the modeling of facilities that act as nodes in a fuel-cycle material
+flow graph. There are, generally, two strategies that are taken by simulators:
+model aggregate fleets of facilities or model individual facilities. The former
+approach is taken by both CAFCA and
+VISION \cite{busquim_e_silva_system_2008,schweitzer_improved_2008}. Both of
+these system dynamics based simulators keep track of general fleet parameters as
+a function of time, e.g. the number of facilities under construction, in
+operation, or being decommissioned. Furthermore, they model the material flows
+into and out of the fleets; however, there is no distinction between individual
+facilities -- the fleets themselves are modeled by the system dynamics
+equations. COSI, while not a system dynamics code, also models the reactors in
+their simulation as a fleet \cite{coquelet-pascal_validation_2011}. DANESS,
+though, takes a different tactic, tracking each facility
+individually \cite{durpel_daness_2003}. Adding this capability, for instance,
+allows DANESS to model individual reactors as unfueled or 'on hold'. 
+
+Fuel cycle simulator developers then must decide how building decisions are to
+be made in their models. For example, if both fast reactor and light water
+reactor technologies are available to the simulation at some time, how should it
+decide which to build, given that there is some demand? This decision is also
+necessary for supporting facilities, e.g. separations and fuel fabrication
+facilities, if they are modeled explicitly. Most simulators follow one of three
+paths: allow user-defined deployment, provide a heuristic that automates
+deployment, or combine the two. CAFCA, for instance, guarantees that reactors
+can be fueled for their entire lifetime, and thus builds reactors given a
+priority ordering, skipping candidates if a look-ahead heuristic determines
+there is not enough fuel \cite{busquim_e_silva_system_2008}. In general,
+reactors in CAFCA are built to minimize light water reactor spent fuel (i.e.,
+fast reactors are built if possible). VISION follows a similar path,
+incorporating user-defined reactor preferences before applying an automated
+heuristic based on fast reactor fuel
+availability \cite{schweitzer_improved_2008}. Neither VISION nor CAFCA allows
+reactors to be built without guaranteed fuel availability. DANESS again takes a
+slightly different approach. It allows users to define reactor demand and will
+instantiate reactors based on a look-ahead heuristic that investigates whether a
+certain percentage of the reactor's required fuel is currently available. This
+is effectively a 'middle of the road' solution, that guarantees reactor fuel
+availability up to some user-defined
+percentage \cite{guerin_benchmark_2009}. Accordingly, reactors that aren't
+fueled go 'on-hold', as previously discussed. It should be noted that each of
+the deployment decisions is based on a ``class'' of reactor (e.g. a PWR), and
+that each simulator described above has some limit on the number of ``classes''
+of reactors. Importantly, each of these deployment methodologies are
+``hard-coded'' into each simulator, i.e., they are the basis of the simulator
+framework and can not be changed in general.
+
+The final two classes of simulation design decisions deal with the detail at
+which one wishes to model the actual materials in the simulation and at what
+level of detail to make material flow decisions based on those materials. Most
+simulators generally model physics at a basic level. For example, the decay of
+isotopes is available but not used in CAFCA
+simulations \cite{guerin_impact_2009}. Material flow decisions are generally
+made based on aggregate quantities, e.g. kilograms of plutonium or
+transuranics \cite{busquim_e_silva_system_2008}. VISION allows for decay of
+isotopics in its simulations, but does not generally make material flow
+decisions based on the updated isotopics, instead depending on user-defined
+input and output reactor fuel recipes \cite{jacobson_verifiable_2010}. COSI
+tends to take the most rigorous approach in this regard. It bases material flow
+decisions on equivalence methods, and models in-pile and decay calculations
+explicitly using a combination of depletion and transport codes, including
+CESAR, APOLLO, and ERANOS \cite{meyer_new_2009}. While COSI models isotopic
+transmutation and decay in order to inform their reactor fuel availability
+calculations, other simulators generally model isotopic changes to inform output
+metrics, such as repository capacity (which is a heavy function of input
+material radiotoxicity and decay heat).
 
 \subsection{Agent Based Supply Chain Simulation}
 
-There are a number of agent-based supply chain frameworks and implementations
-available in the literature with varying levels of accessibility due to
-proprietary
+Taking a step back from a review of available fuel cycle simulators, an
+investigation of the underlying structure of the supply-demand modeling paradigm
+shows that it is, in fact, a subset of the family of supply-chain
+models. Further, if one wishes to model individual facilities, each of which can
+make independent decisions, one naturally arrives at the concept of agent-based
+modeling.There are a number of agent-based supply chain frameworks and
+implementations available in the literature with varying levels of accessibility
+due to proprietary
 considerations \cite{swaminathan_modeling_1998,julka_agent-based_2002,van_der_zee_modeling_2005,chatfield_multi-formalism_2007}.
 However, the nuclear fuel cycle presents a few unique characteristics not
 explicitly treated in the literature. Perhaps the most difficult consideration
@@ -32,19 +121,31 @@ suppliers and consumers based on the requested recipe, i.e.  there are both
 quantity and quality constraints placed on a requested commodity. An additional
 difficulty arises with the enforcement of regional-boundary constraints
 (e.g. prohibiting HEU trade between regions) and inter-enterprise
-preferences. We propose to tackle both issues via a comprehensive supply/demand
-matching mechanism.
-
-We propose using a supply/demand matching algorithm that is comprised 
-of three main procedures: request-for-bids, preference assignment, 
-and resolution. The request-for-bids step signals the producers of 
-various commodities of the demand and material specification for 
-those commodities. The preference assignment step allows the customers
-to analyze each bid in order to assign a preference. The managers of 
-these customers (be they at the region or enterprise level) are 
-allowed to affect the decision making process at this point in order 
-to inform the preferences of the customers covered by their policy 
-space. The resolution step takes the as input the bids and 
-preferences and outputs the material flows for the given time step.\cite{cyclus2012}
+preferences. Julka \cite{julka_agent-based_2002} discusses an extension to the
+normal supply-demand matching paradigm that allows for initial information to be
+provided to consumers before supply and demand are matched. A full discussion of
+this adaptation is provided in the methodology section.
 
 \subsection{Mathematical Programming}
+
+The general suite of techniques we propose to use to solve the supply-demand
+matching problem at each time step lie in the realm of mathematical
+programming. For general linear optimization problems (i.e., those without
+special structure), the Simplex Method, originally developed by
+George \cite{dantzig_generalized_1955} in the 1950's, is a very well studied
+method for solving linear programs. It is computationally efficient, effectively
+solving the linear program (LP) by moving from feasible solution to feasible
+solution in a hill-climbing fashion, guaranteeing a increase in the optimality
+condition. An LP formulation of the nuclear fuel cycle is provided in the
+methodology section. It is foreseeable that such a formulation may not be adequate
+for all simulations because solutions can be provided in a fractional
+manner. While this is appropriate for certain fuel cycle services (e.g. using a
+fraction of an enrichment facility's SWU capacity), it does not necessarily
+accurately model reactor orders. Certainly, heuristics can be applied, but
+mathematical programming includes a suite of tools that can be used to solve
+problems with integer constraints. The analog to the Simplex Method (i.e., the
+most ubiquitous method used in practice) for optimization problems with integer
+decision variables is the Branch and Bound Method, first presented by Land and
+Doig \cite{land_automatic_1960}. It also has been used prolifically in the
+optimization community. A mixed integer-linear program (MILP) formulation of the
+nuclear fuel cycle is provided in the methodology section.
