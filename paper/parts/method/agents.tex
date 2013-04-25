@@ -1,22 +1,19 @@
-This sections describes the simulation interaction between agents. Of the
-research directions presented in this chapter, it is definitely the most
-malleable. Deciding how a simulation is structured from an interactions
-standpoint is a delicate balance of known necessity and perceived future
-needs. There are basic decisions to make: do you want a system with discrete
-material transfers or continuous material flows? Discrete transfers more closely
-match reality and may provide insights in that regard, however the require more
-of their modeling apparatus due to messaging needs and other structures. More
-complex decisions include how one wants to determine connections between
-facilities. Do we assign supplier-consumer pairs to facilities? Do we allow them
-to change? Should the facility make such a decision? Should that decision be
-affected by any other entities? Guerin's comment in \S\ref{sec:intro-benchmarks}
-stems from this ``freedom''. These simulation-engine decisions comprise the
-art-related portion of fuel cycle simulation. The goal is to make these
-decisions in as informed a way as possible from our domain-level knowledge with
-respect to our known and perceived requirements. In general, we try to minimize
-the sheer number of choices we make in this regard, instead relying on well
-known and well documented practices of computer scientists and systems
-engineers.
+Deciding how a simulation is structured from an interactions standpoint is a
+delicate balance of known necessity and perceived future needs. There are basic
+decisions to make: do you want a system with discrete material transfers or
+continuous material flows? Discrete transfers more closely match reality and may
+provide insights in that regard, however the require more of their modeling
+apparatus due to messaging needs and other structures. More complex decisions
+include how one wants to determine connections between facilities. Do we assign
+supplier-consumer pairs to facilities? Do we allow them to change? Should the
+facility make such a decision? Should that decision be affected by any other
+entities? Guerin's comment in \S\ref{sec:intro-benchmarks} stems from this
+``freedom''. These simulation-engine decisions comprise the art-related portion
+of fuel cycle simulation. The goal is to make these decisions in as informed a
+way as possible from our domain-level knowledge with respect to our known and
+perceived requirements. In general, we try to minimize the sheer number of
+choices we make in this regard, instead relying on well known and well
+documented practices of computer scientists and systems engineers.
 
 \Cyclus has an additional goal in that we wish our core simulation
 infrastructure to be as flexible as possible. Given a few basic tenets of agent
@@ -30,30 +27,22 @@ having such capability allows expansion of the user and developer base into
 areas and institutions concerned with security and privacy. Furthermore,
 developers could participate both privately and publicly, e.g. adding general
 capability to the \Cyclus core that is needed for some functionality without
-specifying the internals. Such a community paradigm is shown in Figure
-\ref{fig:community}.
+specifying the internals. This open-source ecosystem further provides incentive
+to develop the agent-based simulation architecture. Other developers can
+concentrate their efforts on individual agent interaction, effectively
+encapsulating developer requirements for learning and interacting with the
+various simulation systems. For a more complete discussion on the ecosystem
+benefits of the \Cyclus development model, see \cite{}.
 
-\begin{figure}[htbp!]
-  \begin{center}
-    \includegraphics[height=8cm]{./parts/method/community.png}
-  \end{center}
-  \caption{The Cyclus Participation Paradigm} 
-  \label{fig:community}
-\end{figure}
-
-This open-source ecosystem further provides incentive to develop the agent-based
-simulation architecture. Other developers can concentrate their efforts on
-individual agent interaction, effectively encapsulating developer requirements
-for learning and interacting with the various simulation systems. Having decided
-upon agent-based interactions, one must determine a way to govern these
-interactions. We want to minimize agent dependency due to our above discussion,
-so using preference-based network flow formulations provide us with a viable
-solution technique that provides a consistent interface. The remainder of this
-section describes how that market resolution interface is informed by the
-agents. Basic agent simulation interaction, such as entering and leaving the
+Having decided upon agent-based interactions, one must determine a way to govern
+these interactions. We want to minimize agent dependency due to our above
+discussion, so using preference-based network flow formulations provide us with
+a viable solution technique that provides a consistent interface. The remainder
+of this section describes how that market resolution interface is informed by
+the agents. Basic agent simulation interaction, such as entering and leaving the
 simulation are also described.
 
-\subsection{Supply/Demand Parameters}
+\subsubsection{Supply/Demand Parameters}
 
 The resolution of supply and demand at any given time step is the result of the
 mathematical program techniques described in \S\ref{sec:gfctp}; however, there
@@ -136,7 +125,7 @@ that violate a given rule to 0, effectively eliminating that arc. Once
 facilities have completed their preference assignments, their managers are able
 to permute them based on institutional or regional factors, explained below.
 
-\subsection{Facilities}
+\subsubsection{Facilities}
 
 Facilities in \Cyclus are abstracted to either consumers or suppliers of
 commodities, and some may be both. Supplier agents are provided agency by being
@@ -148,7 +137,7 @@ for each agent, it is possible to define strategies that can be attached or
 detached to the agents at run-time. Such strategies are an example of the
 Strategy design pattern \cite{vlissides_design_1995}.
 
-\subsection{Institutions}
+\subsubsection{Institutions}
 
 Institutions in \Cyclus manage a set of facilities. They are tasked with the
 actual instantiation of specific facilities, e.g. it is the institutions job to
@@ -172,7 +161,7 @@ simulation design decisions, part of the ``art'' of simulation. Accordingly,
 through the course of research, the possible design space will be analyzed in
 order to determine best practices for this type of design.
 
-\subsection{Regions}
+\subsubsection{Regions}
 
 Regions in \Cyclus are concerned with meeting certain requirements, e.g. power
 capacity, fuel cycle service capacity, etc. The notion of which facilities will
