@@ -150,29 +150,29 @@ Doig \cite{land_automatic_1960}. It also has been used prolifically in the
 optimization community. A mixed integer-linear program (MILP) formulation of the
 nuclear fuel cycle is provided in the methodology section.
 
-\subsection{Automation of Fuel Cycle Simulation}
+%% \subsection{Automation of Fuel Cycle Simulation}
 
-There has recently been a movement towards automating facility processes and
-decision making on time scales appropriate for the quick computation times
-required by the current state of the art of fuel cycle simulation. As currently
-practiced, fuel cycle simulation is used to investigate the effect of a variety
-of parameters on larger fuel cycle metrics; accordingly, at the
-investigation-level, simulators are invoked many times in parameter sweeps. At
-present, simulators tend to force users to make many decisions, a prime example
-of which is the current norm of requiring users to provide output and input fuel
-isotopics. The lone counter example is COSI, which performs relatively precise
-depletion calculations for each reactor configuration, using a transport
-calculation to determine fluence rates and multigroup cross sections, collapsing
-those into 1-group cross sections, and using those 1-group cross sections in
-CESAR to determine the depleted isotopic vector \cite{meyer_new_2009}. An
-automated, hybrid method has been proposed by Scopatz that uses an ``essential
-physics fluence-based parameterized reactor burnup model''
-\cite{scopatz_essential_2011}, covering both thermal and fast fluence-based
-reactors.  Similarly, Huff provides an generic repository model, which allows
-for repository capacity decsision to be made on-the-fly during a simulation
-\cite{huff_integrated_2013}. One missing link in the automated decision making
-of the fuel cycle lies in the separations and fuel fabrication step, i.e., how
-one should match separated material with requested fuel recipes. This is known
-colloquially as the ``Winery Problem''. A mathematical programming formulation
-of this problem is provided in the methodology section, extending Oliver's
-initial concept \cite{oliver_geniusv2:_2009}.
+%% There has recently been a movement towards automating facility processes and
+%% decision making on time scales appropriate for the quick computation times
+%% required by the current state of the art of fuel cycle simulation. As currently
+%% practiced, fuel cycle simulation is used to investigate the effect of a variety
+%% of parameters on larger fuel cycle metrics; accordingly, at the
+%% investigation-level, simulators are invoked many times in parameter sweeps. At
+%% present, simulators tend to force users to make many decisions, a prime example
+%% of which is the current norm of requiring users to provide output and input fuel
+%% isotopics. The lone counter example is COSI, which performs relatively precise
+%% depletion calculations for each reactor configuration, using a transport
+%% calculation to determine fluence rates and multigroup cross sections, collapsing
+%% those into 1-group cross sections, and using those 1-group cross sections in
+%% CESAR to determine the depleted isotopic vector \cite{meyer_new_2009}. An
+%% automated, hybrid method has been proposed by Scopatz that uses an ``essential
+%% physics fluence-based parameterized reactor burnup model''
+%% \cite{scopatz_essential_2011}, covering both thermal and fast fluence-based
+%% reactors.  Similarly, Huff provides an generic repository model, which allows
+%% for repository capacity decsision to be made on-the-fly during a simulation
+%% \cite{huff_integrated_2013}. One missing link in the automated decision making
+%% of the fuel cycle lies in the separations and fuel fabrication step, i.e., how
+%% one should match separated material with requested fuel recipes. This is known
+%% colloquially as the ``Winery Problem''. A mathematical programming formulation
+%% of this problem is provided in the methodology section, extending Oliver's
+%% initial concept \cite{oliver_geniusv2:_2009}.
