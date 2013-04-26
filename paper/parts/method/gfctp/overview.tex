@@ -1,3 +1,54 @@
+Once a particular instance of a supply and demand commodity market has been
+described for a given time step, supplying facilities must somehow be matched
+with consumer facilities. It is possible to do this matching in a naive fashion
+using some heuristic, and such an approach may be appropriate for some
+simulations depending on the level of detail required. However, we seek a more
+flexible solution technique that will scale with the detail needed for each
+simulation. The mathematical programming discipline provides a natural fit for
+such solution techniques through a standard framework used to describe problem
+instances and a standard solution algorithm. Of the special problem structures
+enumerated in mathematical programming texts, the well-studied Transportation
+Problem provides a good starting point for the solution framework we seek.
+
+The Transportation Problem is a member of the family of minimum-cost network
+flow problems. It is comprised of a set of suppliers, $I$, a set of consumers,
+$J$, and supplier-consumer costs, $c_{i,j}$. Suppliers and consumers form a
+bipartite graph, providing the problem with signifigant underlying
+structure. Its formulation is straightforward:
+
+%%% 
+\begin{subequations}\label{eqs:TP}
+  \begin{align}
+    %%
+    \min_{z} \:\: & 
+    z = \sum_{i \in I}\sum_{j \in J} c_{i,j} x_{i,j} 
+    & \label{eqs:TP_obj} \\
+    %%
+    \text{s.t.} \:\: &
+    \sum_{j \in J} x_{i,j}^{h} \leq s_{i} 
+    &
+    \forall \: i \in I \label{eqs:TP_sup} \\
+    %%
+    &
+    \sum_{i \in I} x_{i,j} \geq d_{j} 
+    & 
+    \forall \: j \in J \label{eqs:TP_dem} \\
+    %%
+    &
+    x_{i,j} \geq 0
+    &
+    \forall \: x \in X \label{eqs:TP_x}
+    %%
+  \end{align}
+\end{subequations}
+%%% 
+
+where Equation \ref{eqs:TP_sup} provides a supply-side constraint, stating that
+the amount of material leaving a supplier, $i$, must not be greater than its
+supply, $s_i$, and Equation \ref{eqs:TP_dem} provides a demand-side constraint,
+stating that the amount of material entering a consumer, $j$, must be at least
+the demanded amount, $d_j$. Equation \ref{eqs:TP_x} simply states that flow
+along arcs must be positive.
 
 In formulating the Generic Fuel Cycle Transportation Problem (GFCTP), note that
 the ``players'' in the set of commodity ``markets'' are the individual
