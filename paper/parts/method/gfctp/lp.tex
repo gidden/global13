@@ -1,11 +1,29 @@
+The linear program formulation of the GFCTP involves a set of players that act
+in an overarching market. The players are the supplier and consumer
+faciliteising involved in the simulation, i.e., the reactors, fabrication
+facilities, repositories, etc. In strict mathematical programming parlance, the
+GFCTP can be described as a Multicommodity Transportation Problem with Side
+Constraints. Accordingly are a number of departures from the classical MTP.
 
-The Generic Fuel Cycle Transportation Problem with Side Constraints (GFCTP-LP)
-describes a multi-commodity setting in which demand can be met by multiple
-commodities. Consumers denote a cost preference over the possible commodities
-they consume and a demand for the set of commodities that must be met. Suppliers
+To begin, the multicommodity aspect of the problem is not manifest on arc
+capacities. Instead, facility demand constraints, whose equivalent in the MTP
+are Equation \ref{eqs:MTP_dem}, incorporate a set of satisfactory commodities,
+rather than a single satisfactory commodity. For example, a reactor may be able
+to accept UOX or MOX fuel, but has a demand for total fuel. Additionally,
+supplier facilities may have a set of constraints on their ability to supply a
+given commodity and they may not be able to directly express those constraints
+with the unit of the commodity market, which is generally kilograms of a
+commodity. Take an enrichment facility for example. Such a facility has
+nominally two constraints: SWU capacity and natural uranium capacity. The former
+constraint is a processing constraint, and the latter constraint is an inventory
+constraint; however, both are necessary to fully define the
+problem. Furthermore, let us note that the output of this facility is kilograms
+of enriched uranium. Accordingly, the above capacities must be translated into
+units of this output. Because multiple commodities can satisfy demand, consumers
+denote a cost preference over the possible commodities they consume. Suppliers
 denote one or more production capacities for a given commodity which serve as
 the set of supply capacities analogous to the normal MCTP
-(see \S\ref{sec:MCTP}). The GFCTP-LP formulation is as follows:
+(Equation \ref{eqs:MTP_sup}). The GFCTP-LP formulation is as follows:
 
 %%% 
 \begin{subequations}\label{eqs:GFCTP-LP}
@@ -34,6 +52,8 @@ the set of supply capacities analogous to the normal MCTP
   \end{align}
 \end{subequations}
 %%% 
+
+%%% HERE %%%
 
 The sets and variables involved are described in Tables \ref{tbl:GFCTP-LP-sets}
 and \ref{tbl:GFCTP-LP-vars}. Note that $H_{j}$ is a subset of the commodities:
@@ -115,7 +135,20 @@ then the GFCTP-LP is in fact the a normal Transportation Problem, because the
 quality translation function ($\beta_{i,k}(q_{j}^{h})$) translates to a constant
 at solution time.
 
-\paragraph{Capacity Translation Function and Constraints Example}~\\
+%% It should be noted that the addition of integer variables changes both the
+%% complexity of the formulation and the complexity of the solution technique. Such
+%% a change requires a Mixed Integer-Linear Program (MILP) formulation and solution
+%% via the branch-and-bound method (see \S\ref{sec:bnb}) which solves NP-Hard
+%% combinatorial optimization problems whereas the Linear Program (LP) version
+%% requires the transportation simplex method (see \S\ref{sec:trans-simplex})
+%% which is solvable in polynomial time.  Accordingly, I describe the full
+%% formulation in two parts below: \S\ref{sec:GFCTP-LP} describes the linear
+%% program formulation with side constraints which I will denote GFCTP-LP
+%% and \S\ref{sec:GFCTP-E} describes the MILP formulation with side constraints
+%% which I will denote GFCTP-E (E stands for ``exclusive'', i.e., integer variables
+%% denote an exclusive selection of consumers and/or producers).
+
+\paragraph{Capacity Translation Function and Constraints Example}
 
 The notion of a capacity translation function is something that I have
 introduced out of necessity due to the complexity of the GFCTP. Accordingly, an
@@ -186,7 +219,7 @@ combining Equations \ref{eqs:GFCTP-LP_sup}, \ref{eqs:enr-q-swu},
 \sum_{j \in J}\beta_{enr,SWU}(\varepsilon_{j}) \: x_{enr,j}^{EU} & \leq s_{enr,SWU}
 \end{align}
 
-\paragraph{Satisfying Commodity Set Example}~\\
+\paragraph{Satisfying Commodity Set Example}
 
 The other departure the GFCTP-LP takes from the normal MCTP formulation is the
 location of its multicommodity dependence. As presented in \S\ref{sec:MCTP}, the
