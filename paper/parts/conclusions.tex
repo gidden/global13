@@ -1,6 +1,28 @@
-Presented herein are a number of simple simulations in order to 
-demonstrate the capability of an implementation of the framework. We 
-discuss various modeling tradeoffs encountered while constructing 
-once-through and recycle simulation cases. We finish with a 
-discussion of the future simulation landscape and expansion of the 
-use of the framework.
+This paper presented a generic methodology for modeling fuel cycle simulation
+entity interactions. The work was motivated by the want to provide a fleixble
+platform on which one could explore a variety of fuel cycles without requiring
+simulation-engine level changes in the underlying code base. Furthermore, this
+flexible platform is available as an open source project, allowing any developer
+access to the simulation engine while also allowing for cloistered development
+at sites with sensitive information. 
+
+Mathematical programming techniques were leveraged to allow such an
+encapsulation of simulation engine, abstracting away the notion of hard-coded
+connections between facilities. Two strategies were provided, one that runs at
+very quick time scales and can be adjusted via simple heuristics to model
+individual interactions using a linear programming formulation. A more advance,
+and also more computationally time consuming, approach was also provided for
+more detailed simulations, utilizing a mixed integer-linear programming
+approach.
+
+Furture work will concentrate first on implementing the proposed approach in the
+\Cyclus code base, building upon the already-existing agent-interaction
+simulation infrastructure. Concurrently, the market resolution algorithm will be
+benchmarked agaisnt other fuel cycle simulation codes in order to provide a
+basic level of confidence in it as well as to inform both the \Cyclus
+development group and the wider simulation community as to the relative
+strengths and weaknesses in a generic approach, rather than modeling specific
+fuel cycles explicitly. Additional work on the \Cyclus simulation engine will
+also continue, and will involve an incorporation of a graphical user interface
+front and back end, effectively removing the need to physically alter XML files
+or investigate SQL databases.
