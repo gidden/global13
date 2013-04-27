@@ -13,7 +13,7 @@ Problem provides a good starting point for the solution framework we seek.
 The Transportation Problem is a member of the family of minimum-cost network
 flow problems. It is comprised of a set of suppliers, $I$, a set of consumers,
 $J$, and supplier-consumer costs, $c_{i,j}$. Suppliers and consumers form a
-bipartite graph, providing the problem with signifigant underlying
+bipartite graph, providing the problem with significant underlying
 structure. Its formulation is straightforward:
 
 %%% 
@@ -35,7 +35,7 @@ structure. Its formulation is straightforward:
     \forall \: j \in J \label{eqs:TP_dem} \\
     %%
     &
-    x^h_{i,j} \geq 0
+    x_{i,j} \geq 0
     &
     \forall \: x \in X \label{eqs:TP_x}
     %%
@@ -43,7 +43,8 @@ structure. Its formulation is straightforward:
 \end{subequations}
 %%% 
 
-where Equation \ref{eqs:TP_sup} provides a supply-side constraint, stating that
+where $x_{i,j}$ is the flow some commodity from $i$ to $j$. 
+Equation \ref{eqs:TP_sup} provides a supply-side constraint, stating that
 the amount of material leaving a supplier, $i$, must not be greater than its
 supply, $s_i$, and Equation \ref{eqs:TP_dem} provides a demand-side constraint,
 stating that the amount of material entering a consumer, $j$, must be at least
@@ -87,8 +88,8 @@ resulting in the Multicommodity Transportation Problem (MTP):
 %%% 
 
 where, conceptually, the main addition is Equation \ref{eqs:MTP_arc}, which is
-termed a ``bundle'' constraint, limiting the total flow of all commodities
-along an arc, $(i,j)$, to some value, $r_{i,j}$. The extended problem is perturbed by adding special
-considerations discussed below to formulate the Generic Fuel Cycle
-Transportation Problem (GFCTP). 
+termed a ``bundle'' constraint, limiting the total flow of all commodities along
+an arc, $(i,j)$, to some value, $r_{i,j}$. The MTP is perturbed by adding
+special considerations discussed below to formulate the Generic Fuel Cycle
+Transportation Problem (GFCTP).
 

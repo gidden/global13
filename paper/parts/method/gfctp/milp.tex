@@ -1,9 +1,3 @@
-%% Finally, realism is introduced through integer
-%% variables. For a number of facilities, especially reactors, it may not be
-%% realistic for a given fuel order to be split amongst a variety of suppliers. The
-%% realm of integer programming techniques allow us to introduced binary variables
-%% to enforce this reality constraint.
-
 The previous linear program (LP) formulation of the Generic Fuel Cycle
 Transportation Problem fully describes many of the types of transactions that
 arise at any given time step. However, it importantly glosses over the critical
@@ -16,13 +10,22 @@ detail is not necessary in every simulation, but we wish to allow this advanced
 modeling for those that do need it. In order to provide this capability of
 quantizing orders, binary decision variables must be introduced and integer
 programming techniques must be utilized to solve the resulting mixed
-integer-linear program. I present the updated formulation below. The key
-difference is the inclusion binary variables $y_{i,j}^{h}$, which are 1 if
-producer $i$ trades commodity $h$ with consumer $j$ and constants
-$\tilde{x}_{j}^{h}$, which denote the quantity of a quantized order. Further a
-new set is introduced, $J_{e}$, the set of consumers who require quantized, or
-exclusive, orders. The original set of consumers, those who allow partial
-orders, I denote $J_{p}$. These two sets constitute the set of all consumers.
+integer-linear program. 
+
+It should be noted that the addition of integer variables changes both the
+complexity of the formulation and the complexity of the solution technique. Such
+a change requires a Mixed Integer-Linear Program (MILP) formulation and solution
+via the branch-and-bound method which solves NP-Hard combinatorial optimization
+problems whereas the Linear Program (LP) version requires the simplex method
+which is much more efficient.
+
+The updated formulation below is presented below. The key difference is the
+inclusion binary variables $y_{i,j}^{h}$, which are 1 if producer $i$ trades
+commodity $h$ with consumer $j$ and constants $\tilde{x}_{j}^{h}$, which denote
+the quantity of a quantized order. Further a new set is introduced, $J_{e}$, the
+set of consumers who require quantized, or exclusive, orders. The original set
+of consumers, i.e., those who allow partial orders, are denoted $J_{p}$. These
+two sets constitute the set of all consumers.
 
 \begin{equation}\label{eqs:consumer-union}
   J = J_{p} \cup J_{e}
@@ -98,7 +101,7 @@ Set         & Description \\
 \hline
 $H$         & all commodities  \\
 $I$         & all producers  \\
-$J_{p}$     & all consumers who accept parital orders  \\
+$J_{p}$     & all consumers who accept partial orders  \\
 $J_{e}$     & all consumers who accept only exclusive orders  \\
 $X$         & the feasible set of flows between producers and consumers  \\
 $Y$         & the feasible set of exclusive flows between 
@@ -149,12 +152,10 @@ here. The only difference is the notion of the binary variables, $y_{i,j}^{h}$s,
 which denote a sort of on/off switch as to whether a consumer's entire requested
 amount of material is met by a supplier or not.
 
-It should be noted that this advanced formulation brings in signifigant
-complexity to the resolution method at every time step. As with other mixed
-integer-linear programs, the GFCTP-E is NP-Complete and must be solved using the
-Branch-and-Bound technique described in \S\ref{sec:bnb}. However, simple
-heuristics exist. The most common of them is to solve a relaxed version of the
-problem in the form of a linear program, and to round values to form an integer
-solution. The exploration of additional heuristics will be performed based on
-the outcome of the implementation and analysis of this formulation in
-the \Cyclus simulation environment.
+It should be noted that this advanced formulation adds significant complexity to
+the resolution method at every time step. However, simple heuristics exist. The
+most common of them is to solve a relaxed version of the problem in the form of
+a linear program, and to round values to form an integer solution. The
+exploration of additional heuristics will be performed based on the outcome of
+the implementation and analysis of this formulation in the \Cyclus simulation
+environment.
