@@ -45,17 +45,18 @@ formulation follows:
     && \\
     %%
     \label{eq:GRCTP-E_sup}
-    \text{s.t.} \:\: 
     &
+    \text{s.t.} \:\: 
     \sum_{j \in J_{p}}\beta_{i,k}(q_{j}^{h}) x_{i,j}^{h}
-    + \sum_{j \in J_{e}}\beta_{i,k}(q_{j}^{h}) y_{i,j}^{h} \tilde{x}_{j}^{h} \leq s_{i,k}^{h} 
-    &&
-    \forall \: i \in I, \: \forall \: k \in K_{i}^{h}, \forall \: {h \in H} \\
+    + \sum_{j \in J_{e}}\beta_{i,k}(q_{j}^{h}) y_{i,j}^{h} \tilde{x}_{j}^{h} \leq s_{i,k}^{h} \nonumber \\
+    &
+    \qquad\qquad\qquad\qquad
+    \forall \: i \in I, \: \forall \: k \in K_{i}^{h}, \forall \: {h \in H}\\
     %%
     \label{eq:GRCTP-E_dem_p}
     &
-    \sum_{i \in I}\sum_{h \in H_{j}} x_{i,j}^{h} \geq d_{j}(H_{j}) 
-    & 
+    \sum_{i \in I}\sum_{h \in H_{j}} x_{i,j}^{h} \geq d_{j}(H_{j})
+    &
     \forall \: j \in J_{o} &\\
     %%
     \label{eq:GRCTP-E_dem_e}
