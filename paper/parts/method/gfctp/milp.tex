@@ -19,13 +19,13 @@ via the branch-and-bound method which solves NP-Hard combinatorial optimization
 problems whereas the Linear Program (LP) version requires the simplex method
 which is much more efficient.
 
-The updated formulation below is presented below. The key difference is the
-inclusion binary variables $y_{i,j}^{h}$, which are 1 if producer $i$ trades
-commodity $h$ with consumer $j$ and constants $\tilde{x}_{j}^{h}$, which denote
-the quantity of a quantized order. Further a new set is introduced, $J_{e}$, the
-set of consumers who require quantized, or exclusive, orders. The original set
-of consumers, i.e., those who allow partial orders, are denoted $J_{p}$. These
-two sets constitute the set of all consumers.
+The updated formulation is presented below. The key difference is the inclusion
+binary variables $y_{i,j}^{h}$, which are 1 if producer $i$ trades commodity $h$
+with consumer $j$ and constants $\tilde{x}_{j}^{h}$, which denote the quantity
+of a quantized order. Further a new set is introduced, $J_{e}$, the set of
+consumers who require quantized, or exclusive, orders. The original set of
+consumers, i.e., those who allow partial orders, are denoted $J_{p}$. These two
+sets constitute the set of all consumers.
 
 \begin{equation}\label{eqs:consumer-union}
   J = J_{p} \cup J_{e}
@@ -148,7 +148,7 @@ $d_{j}(H_{j})$            & the total demand of consumer $j$ over the set of
 %%%
 
 The examples of the various constraints from the previous section also apply
-here. The only difference is the notion of the binary variables, $y_{i,j}^{h}$s,
+here. The only difference is the notion of the binary variables, $y_{i,j}^{h}$,
 which denote a sort of on/off switch as to whether a consumer's entire requested
 amount of material is met by a supplier or not.
 

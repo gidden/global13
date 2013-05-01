@@ -150,9 +150,8 @@ can be used \cite{ahuja_network_1993}.
 
 The notion of a capacity translation function is something that has been
 introduced out of necessity due to the complexity of the GFCTP. Accordingly, an
-example will help clarify its purpose. This time can also be used to also to
-provide an example of a producer with multiple capacity constraints for a given
-commodity.
+example will help clarify its purpose. This time can also be used to provide an
+example of a producer with multiple capacity constraints for a given commodity.
 
 Take, for example, an enrichment facility. Such a facility produces the
 commodity ``Enriched Uranium (EU)''. This facility has two constraints on its
@@ -180,19 +179,19 @@ question is its enrichment, i.e.,
 
 These values are set during a prior phase of the overall matching algorithm, and
 can therefore be considered constant. Further, let us note that, in general, an
-enrichment facility's operation, or rather its capacity thereof, is governed by
-two parameters: $x_{f,enr}$, the fraction of U-235 in its feed material, and
-$x_{t,enr}$, the fraction of U-235 in its tails material. These parameters
+enrichment facility's operation, or rather its capacity, is governed by two
+parameters: $\varepsilon_{f,enr}$, the fraction of U-235 in its feed material, and
+$\varepsilon_{t,enr}$, the fraction of U-235 in its tails material. These parameters
 determine the amount of SWU required to produce some amount of enriched uranium:
 
 \begin{align}
 \begin{split}
 \label{eqs:swu}
 SWU = & \:\: P ( V(\varepsilon_{j}) 
-      + \frac{\varepsilon_{j} - x_{t,enr}}
-               {x_{f,enr} - x_{t,enr}} V(x_{t,enr}) \\
-      & - \frac{\varepsilon_{j} - x_{f,enr}}
-               {x_{f,enr} - x_{t,enr}} V(x_{f,enr}) )
+      + \frac{\varepsilon_{j} - \varepsilon_{f,enr}}
+               {\varepsilon_{f,enr} - \varepsilon_{t,enr}} V(\varepsilon_{t,enr}) \\
+      & - \frac{\varepsilon_{j} - \varepsilon_{t,enr}}
+               {\varepsilon_{f,enr} - \varepsilon_{t,enr}} V(\varepsilon_{f,enr}) )
 \end{split}
 \end{align}
 
@@ -208,15 +207,15 @@ arguments of this facility's two capacity constraints.
 
 \begin{align}
 \label{eqs:enr-prod-beta}
-\beta_{enr,NU}(\varepsilon_{j}) = & \:\: \frac{\varepsilon_{j} - x_{t,enr}}
-                                      {x_{f,enr} - x_{t,enr}} \\
+\beta_{enr,NU}(\varepsilon_{j}) = & \:\: \frac{\varepsilon_{j} - \varepsilon_{t,enr}}
+                                      {\varepsilon_{f,enr} - \varepsilon_{t,enr}} \\
 \begin{split}
 \label{eqs:enr-swu-beta}
 \beta_{enr,SWU}(\varepsilon_{j}) = & \:\: V(\varepsilon_{j}) \\
-                         & + \frac{\varepsilon_{j} - x_{t,enr}}
-                                  {x_{f,enr} - x_{t,enr}} V(x_{t,enr}) \\
-                         & - \frac{\varepsilon_{j} - x_{f,enr}}
-                                  {x_{f,enr} - x_{t,enr}} V(x_{f,enr})
+                         & + \frac{\varepsilon_{j} - \varepsilon_{f,enr}}
+                                  {\varepsilon_{f,enr} - \varepsilon_{t,enr}} V(\varepsilon_{t,enr}) \\
+                         & - \frac{\varepsilon_{j} - \varepsilon_{t,enr}}
+                                  {\varepsilon_{f,enr} - \varepsilon_{t,enr}} V(\varepsilon_{f,enr})
 \end{split}
 \end{align}
 
@@ -249,7 +248,7 @@ that an enrichment facility takes feed uranium and then enriches its U-235
 content. This feed uranium can come from different sources which have different
 feed enrichments. In practice, the most likely sources of feed uranium are
 natural uranium (NU) or recycled uranium (RU), a product of reprocessing light
-water reactor fuel. Recycled uranium is advantageous to use because it has a
+water reactor fuel. Recycled uranium may be advantageous to use if it has a
 higher weight percent of U-235 than does natural uranium. We can now state the
 set the values for $H_{j}$ for this facility:
 

@@ -9,7 +9,7 @@ utilization, costs, and proliferation resistance. However, there are a few key
 choices that have been historically made by all simulation developers,
 including: what program or language to use, how to determine which facilities to
 build, when to build them, how to determine the flow of material when there are
-competing sources or sinks for that material, and whether to model them
+competing sources or sinks for that material, whether to model them
 individually, and at what level of fidelity physics should be modeled in the
 simulation (e.g., should material decay or should it not). One could describe
 these are the major design choices for simulation development teams to assess,
@@ -49,7 +49,7 @@ into and out of the fleets; however, there is no distinction between individual
 facilities -- the fleets themselves are modeled by the system dynamics
 equations. COSI, while not a system dynamics code, also models the reactors in
 their simulation as a fleet \cite{coquelet-pascal_validation_2011}. DANESS,
-though, takes a different tactic, tracking each facility
+though, takes a different tactic, tracking the history of each facility
 individually \cite{durpel_daness_2003}. Adding this capability, for instance,
 allows DANESS to model individual reactors as unfueled or 'on hold'. 
 
