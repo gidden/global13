@@ -365,7 +365,7 @@
      \: \forall \: j \in J_{e}
   \end{equation}
 
-  Flow is defined by $y_{i,j}^{h} * d_{j}(H_{j})$.
+  Flow with integer variables is defined by $y_{i,j}^{h} d_{j}(H_{j})$.
 \end{frame}
 
 \begin{frame}[ctb!]
@@ -374,11 +374,11 @@
   Supply constraints also incorporate to two possible flows of material out of a
   supplier:
   
-  \begin{equation}    
+  \begin{multline}    
     \sum_{j \in J_{p}}\beta_{i,k}(q_{j}^{h}) x_{i,j}^{h}
-    + \sum_{j \in J_{e}}\beta_{i,k}(q_{j}^{h}) y_{i,j}^{h} d_{j}(H_{j}) \leq s_{i,k}^{h}
+    + \sum_{j \in J_{e}}\beta_{i,k}(q_{j}^{h}) y_{i,j}^{h} d_{j}(H_{j}) \leq s_{i,k}^{h} \\
      \: \forall \: i \in I, \: \forall \: k \in K_{i}^{h}, \forall \: {h \in H}
-  \end{equation}
+  \end{multline}
   
 \end{frame}
 
